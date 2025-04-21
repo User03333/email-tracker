@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Email Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Tracker Redirect</title>
 </head>
 <body>
-  <!-- Example tracking pixel -->
-  <img src="https://script.google.com/macros/s/AKfycbz92RDJP8YWGDy95I1S4r8Scx3r6zyWR1HEBzTrqlvCaR-0Jsd7nxPbpSPOVoT0TtCibg/exec?email=recipient@example.com&campaign=demo" 
-       width="1" height="1" style="display: none;">
+  <script>
+    // Replace with your actual Apps Script Web App URL
+    const BASE_URL = "https://script.google.com/macros/s/AKfycbz92RDJP8YWGDy95I1S4r8Scx3r6zyWR1HEBzTrqlvCaR-0Jsd7nxPbpSPOVoT0TtCibg/exec";
+
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email') || 'unknown';
+    const target = urlParams.get('target') || '';
+    const type = urlParams.get('type') || 'click';
+
+    // Redirect through tracking server
+    const trackingUrl = `${BASE_URL}?type=${type}&email=${encodeURIComponent(email)}&target=${encodeURIComponent(target)}`;
+
+    // Redirect by replacing location
+    window.location.replace(trackingUrl);
+  </script>
 </body>
 </html>
